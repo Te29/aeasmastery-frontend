@@ -1,4 +1,4 @@
-# AEAS Mastery - Frontend
+# AEASy - Frontend
 
 AI-powered test preparation platform for Australian Education Assessment Services (AEAS) exams.
 

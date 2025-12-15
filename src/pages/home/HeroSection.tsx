@@ -21,7 +21,7 @@ export function HeroSection() {
           {/* Right: Illustration */}
           <div className="flex-4 flex justify-center">
             <DotLottieReact
-              src="../../../public/welcome.lottie"
+              src="welcome.lottie"
               aria-hidden="true"
               loop
               autoplay

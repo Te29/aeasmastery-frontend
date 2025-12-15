@@ -9,7 +9,7 @@ const NAV_LINK_CLASS =
 
 const EXERCISE_LINKS = [
   {
-    to: '/exercise/vocabulary',
+    to: '/exercise-generator',
     label: '词汇',
   },
   {
@@ -84,7 +84,7 @@ export function Header() {
             )}
           </Menu>
 
-          <Link to="/" className={NAV_LINK_CLASS}>
+          <Link to="/course" className={NAV_LINK_CLASS}>
             课程
           </Link>
           <Link to="/instructors" className={NAV_LINK_CLASS}>

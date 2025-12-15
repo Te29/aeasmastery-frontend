@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const QUICK_LINKS = [
   { to: '/', label: 'Home' },
-  { to: '/', label: 'Course' },
+  { to: '/course', label: 'Course' },
   { to: '/about', label: 'About' },
   { to: '/contact', label: 'Contact' },
 ];
@@ -32,7 +32,7 @@ export function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {QUICK_LINKS.map((link) => (
-                <li key={link.to}>
+                <li key={link.label}>
                   <Link
                     to={link.to}
                     className="text-sm text-gray-800 hover:text-gray-900 hover:underline transition-colors"

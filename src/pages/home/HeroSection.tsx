@@ -8,14 +8,15 @@ export function HeroSection() {
           {/* Left: Text content */}
           <div className="flex-2 ml-20">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              AI辅助高效学习
+              AI-Powered Tools for
               <br />
-              冲刺AEAS
+              AEAS Teachers
             </h1>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              根据真题分析，逐个攻破词汇、听力、阅读、 写作、口语五个题型
+              Intelligent AI tools that simplify AEAS lesson preparation and
+              feedback.
             </p>
-            <Button>开始测评</Button>
+            <Button>Try Teacher Tools</Button>
           </div>
 
           {/* Right: Illustration */}

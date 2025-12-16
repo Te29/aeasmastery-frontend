@@ -9,9 +9,15 @@ type ResultConfig = {
 };
 
 const resultConfig: Record<Exclude<GeneratorStatus, 'idle'>, ResultConfig> = {
-  generating: { text: '生成中...', decorativeImage: 'loading.lottie' },
-  success: { text: '生成成功！', decorativeImage: 'success.lottie' },
-  error: { text: '生成失败，请重试', decorativeImage: 'error.lottie' },
+  generating: { text: 'Generating...', decorativeImage: 'loading.lottie' },
+  success: {
+    text: 'Generation Successful!',
+    decorativeImage: 'success.lottie',
+  },
+  error: {
+    text: 'Generation Failed. Please try again.',
+    decorativeImage: 'error.lottie',
+  },
 };
 
 export const GenerationResult = forwardRef<
@@ -36,7 +42,7 @@ export const GenerationResult = forwardRef<
 
         {/* Right: Download funtion */}
         {status === 'success' && (
-          <Button className="flex-1 md:max-w-1/6">下载试题</Button>
+          <Button className="flex-1 md:max-w-1/6">Download Exercise</Button>
         )}
       </div>
     </div>

@@ -21,8 +21,8 @@ export function ExerciseGeneratorPage() {
     <>
       <Header />
       <FeatureCardTitle
-        title="AI生成词汇练习"
-        description="选择年级及难度，生成真题标准格式练习。"
+        title="AI Vocabulary Exercise Generator"
+        description="Select grade and difficulty to generate exercises in official AEAS format."
       />
       <GeneratorForm status={status} setStatus={setStatus} />
       <GenerationResult status={status} ref={resultRef} />

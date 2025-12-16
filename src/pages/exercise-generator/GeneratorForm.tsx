@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { Button } from '../../components/ui/Button';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import type { GeneratorStatus } from './ExerciseGeneratorPage';
+import axios from 'axios';
 
 type FormKeys =
   | 'grade'
@@ -29,10 +30,10 @@ type ButtonConfig = {
 };
 
 const buttonConfig: Record<GeneratorStatus, ButtonConfig> = {
-  idle: { text: '点击生成', variant: 'primary', disabled: false },
-  generating: { text: '正在生成...', variant: 'disabled', disabled: true },
-  success: { text: '再次生成', variant: 'primary', disabled: false },
-  error: { text: '重新生成', variant: 'primary', disabled: false },
+  idle: { text: 'Generate', variant: 'primary', disabled: false },
+  generating: { text: 'Generating...', variant: 'disabled', disabled: true },
+  success: { text: 'Generate Again', variant: 'primary', disabled: false },
+  error: { text: 'Try Again', variant: 'primary', disabled: false },
 };
 
 const radioGroups: {
@@ -45,7 +46,7 @@ const radioGroups: {
 }[] = [
   {
     name: 'grade',
-    legend: '年级选择',
+    legend: 'Grade Level',
     options: [
       {
         label: '4-6',
@@ -63,30 +64,36 @@ const radioGroups: {
   },
   {
     name: 'difficulty',
-    legend: '难度选择',
+    legend: 'Difficulty',
     options: [
-      { label: '简单', value: 'easy' },
-      { label: '中等', value: 'medium' },
-      { label: '困难', value: 'difficult' },
+      { label: 'Easy', value: 'easy' },
+      { label: 'Medium', value: 'medium' },
+      { label: 'Hard', value: 'difficult' },
     ],
   },
   {
     name: 'includeAnswerSheet',
-    legend: '是否附带答题卡',
+    legend: 'Include Answer Sheet',
     options: [
-      { label: '是', value: true },
-      { label: '否', value: false },
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
     ],
   },
   {
     name: 'includeAnswerKey',
-    legend: '是否附带答案',
+    legend: 'Include Answer Key',
     options: [
-      { label: '是', value: true },
-      { label: '否', value: false },
+      { label: 'Yes', value: true },
+      { label: 'No', value: false },
     ],
   },
 ];
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+interface GeminiResponse {
+  text: string;
+}
 
 export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
   const [form, setForm] = useState({
@@ -96,13 +103,27 @@ export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
     includeAnswerKey: true,
   });
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus('generating');
 
-    setTimeout(() => {
-      setStatus('error');
-    }, 2000);
+    const prompt =
+      JSON.stringify(form) +
+      ' According to the options json, generate a set of exercise for AEAS exam in Australia. Response in json.';
+
+    try {
+      const response = await axios.post<GeminiResponse>(API_URL, { prompt });
+      const text = response.data;
+      console.log(text);
+      setStatus('success');
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error('Axios error:', error.response?.data || error.message);
+      } else {
+        console.error('Unexpected error:', error);
+      }
+      throw new Error('Failed to fetch AI response');
+    }
   }
 
   return (
@@ -137,7 +158,9 @@ export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
                     >
                       <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
                     </Radio>
-                    <Label className="cursor-pointer">{option.label}</Label>
+                    <Label className="cursor-pointer whitespace-nowrap">
+                      {option.label}
+                    </Label>
                   </Field>
                 ))}
               </RadioGroup>

@@ -10,23 +10,23 @@ const NAV_LINK_CLASS =
 const EXERCISE_LINKS = [
   {
     to: '/exercise-generator',
-    label: '词汇',
+    label: 'Vocabulary',
   },
   {
     to: '/exercise/listening',
-    label: '听力',
+    label: 'Listening',
   },
   {
     to: '/exercise/reading',
-    label: '阅读',
+    label: 'Reading',
   },
   {
     to: '/exercise/speaking',
-    label: '口语',
+    label: 'Speaking',
   },
   {
     to: '/exercise/writing',
-    label: '写作',
+    label: 'Writing',
   },
 ];
 
@@ -42,7 +42,7 @@ export function Header() {
         {/* Navigation */}
         <nav className="flex gap-10 items-center">
           <Link to="/" className={NAV_LINK_CLASS}>
-            首页
+            Home
           </Link>
 
           {/* Dropdown Menu */}
@@ -52,7 +52,7 @@ export function Header() {
                 <MenuButton
                   className={`${NAV_LINK_CLASS} cursor-pointer flex items-center gap-1 outline-none`}
                 >
-                  AEAS练习
+                  Teacher Tools
                   <ChevronDownIcon
                     className={`w-3 h-3 transition-transform duration-200 ${
                       open ? 'rotate-180' : ''
@@ -84,24 +84,32 @@ export function Header() {
             )}
           </Menu>
 
-          <Link to="/course" className={NAV_LINK_CLASS}>
-            课程
+          <Link to="/course-plan" className={NAV_LINK_CLASS}>
+            Lesson Plans
           </Link>
-          <Link to="/instructors" className={NAV_LINK_CLASS}>
-            教师版
+          <Link to="/resources" className={NAV_LINK_CLASS}>
+            Resources
           </Link>
-          <Link to="/download" className={NAV_LINK_CLASS}>
-            资料下载
+          <Link to="/about" className={NAV_LINK_CLASS}>
+            About AEASy
           </Link>
         </nav>
 
-        {/*Auth buttons  */}
+        {/*Auth buttons To be implemented */}
+        {/*
         <div>
           <Button variant="secondary" className="border-none">
             Log in
           </Button>
           <Button variant="secondary" className="border-none">
             Sign up
+          </Button>
+        </div>
+        */}
+
+        <div>
+          <Button variant="secondary" className="border-none">
+            Contact
           </Button>
         </div>
       </div>

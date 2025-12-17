@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { Button } from '../../components/ui/Button';
-import type { GeneratorStatus } from './ExerciseGeneratorPage';
+import type { GeneratorStatus } from '../../types';
 
 type ResultConfig = {
   text: string;

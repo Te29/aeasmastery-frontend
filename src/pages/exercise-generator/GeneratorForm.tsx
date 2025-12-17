@@ -9,8 +9,8 @@ import {
 import { useState } from 'react';
 import { Button } from '../../components/ui/Button';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import type { GeneratorStatus } from '../../types';
-import { generateExercise } from '../../services/api';
+import type { GeneratorStatus, GeneratorForm } from '../../types';
+import { generateVocabularyExercise } from '../../services/api';
 import { GENERATOR_FORM_OPTIONS, BUTTON_CONFIG } from '../../constants/index';
 
 interface GeneratorFormProps {
@@ -19,7 +19,7 @@ interface GeneratorFormProps {
 }
 
 export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<GeneratorForm>({
     grade: '4-6',
     difficulty: 'easy',
     includeAnswerSheet: true,
@@ -30,7 +30,7 @@ export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
     event.preventDefault();
     setStatus('generating');
     try {
-      const data = await generateExercise(form);
+      const data = await generateVocabularyExercise(form);
       console.log(data);
       setStatus('success');
     } catch (error) {

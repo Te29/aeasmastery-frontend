@@ -4,6 +4,13 @@ export type GeneratorFormFields =
   | 'includeAnswerSheet'
   | 'includeAnswerKey';
 
+export interface GeneratorForm {
+  grade: string;
+  difficulty: string;
+  includeAnswerSheet: boolean;
+  includeAnswerKey: boolean;
+}
+
 export interface RadioGroupConfig {
   name: GeneratorFormFields;
   legend: string;

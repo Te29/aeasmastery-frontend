@@ -10,16 +10,13 @@ import { useState } from 'react';
 import { Button } from '../../components/ui/Button';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import type { GeneratorStatus } from '../../types';
-import axios from 'axios';
+import { generateExercise } from '../../services/api';
 import { GENERATOR_FORM_OPTIONS, BUTTON_CONFIG } from '../../constants/index';
-import type { GeminiResponse } from '../../types';
 
 interface GeneratorFormProps {
   status: GeneratorStatus;
   setStatus: React.Dispatch<React.SetStateAction<GeneratorStatus>>;
 }
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
   const [form, setForm] = useState({
@@ -32,23 +29,13 @@ export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus('generating');
-
-    const prompt =
-      JSON.stringify(form) +
-      ' According to the options json, generate a set of exercise for AEAS exam in Australia. Response in json.';
-
     try {
-      const response = await axios.post<GeminiResponse>(API_URL, { prompt });
-      const text = response.data;
-      console.log(text);
+      const data = await generateExercise(form);
+      console.log(data);
       setStatus('success');
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.error('Axios error:', error.response?.data || error.message);
-      } else {
-        console.error('Unexpected error:', error);
-      }
-      throw new Error('Failed to fetch AI response');
+      console.error('Failed to generate:', error);
+      setStatus('error');
     }
   }
 

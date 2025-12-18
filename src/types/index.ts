@@ -5,8 +5,8 @@ export type GeneratorFormFields =
   | 'includeAnswerKey';
 
 export interface GeneratorForm {
-  grade: string;
-  difficulty: string;
+  grade: '4-6' | '7-9' | '10-12';
+  difficulty: 'easy' | 'medium' | 'difficult';
   includeAnswerSheet: boolean;
   includeAnswerKey: boolean;
 }

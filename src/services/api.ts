@@ -12,22 +12,11 @@ export async function generateVocabularyExercise(
   const userPrompt = `Generate a vocabulary exercise with:
 - Grade level: ${form.grade}
 - Difficulty: ${form.difficulty}
-- Include answer sheet: ${form.includeAnswerSheet}
-- Include answer key: ${form.includeAnswerKey}
+`;
 
-Requirements:
-- Part 1 (Word Meanings): 15 questions in 3 groups of 5
-- Part 2 (Words in Context): 15 fill-in-blank questions
-${form.grade !== '10-12' ? '- Part 3 (Spelling): 20 questions' : ''}
-
-Return JSON only.`;
-
-  const prompt = `${VOCABULARY_SYSTEM_PROMPT}\n${userPrompt}`;
-  console.log(prompt);
   const response = await axios.post<GeminiResponse>(API_URL, {
-    VOCABULARY_SYSTEM_PROMPT,
-    prompt,
+    prompt: `${VOCABULARY_SYSTEM_PROMPT}\n\n${userPrompt}`,
   });
-
+  console.log(extractJson(response.data.text));
   return extractJson(response.data.text) as VocabularyExercise;
 }

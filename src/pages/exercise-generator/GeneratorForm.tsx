@@ -48,64 +48,74 @@ export function GeneratorForm({
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-20 md:px-24 py-2 md:py-4">
-      <div className="flex items-center justify-between gap-12">
-        {/* Left: Generator Options Form  */}
-        <form
-          className="flex flex-3 flex-col gap-10"
-          onSubmit={handleSubmit}
-          method="post"
-          action="#"
-        >
-          {GENERATOR_FORM_OPTIONS.map((group) => (
-            <Fieldset key={group.name} className="flex flex-col gap-4">
-              <Legend className="text-md font-bold text-gray-900">
-                {group.legend}
-              </Legend>
-              <RadioGroup
-                name={group.name}
-                value={form[group.name]}
-                onChange={(value) =>
-                  setForm((f) => ({ ...f, [group.name]: value }))
-                }
-                aria-label="Grade choice"
-                className="flex gap-20 mx-10"
-              >
-                {group.options.map((option) => (
-                  <Field key={option.label} className="flex items-center gap-2">
-                    <Radio
-                      value={option.value}
-                      className="group flex size-5 items-center justify-center rounded-full border bg-white data-checked:bg-blue-400 cursor-pointer"
-                    >
-                      <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
-                    </Radio>
-                    <Label className="cursor-pointer whitespace-nowrap">
-                      {option.label}
-                    </Label>
-                  </Field>
-                ))}
-              </RadioGroup>
-            </Fieldset>
-          ))}
-          <Button
-            type="submit"
-            variant={BUTTON_CONFIG[status].variant}
-            disabled={BUTTON_CONFIG[status].disabled}
-            className="w-1/2 mt-10 "
-          >
-            {BUTTON_CONFIG[status].text}
-          </Button>
-        </form>
+    <section className="py-2 md:py-5 bg-linear-to-b from-white to-yellow-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Form Card */}
+          <div className="order-2 lg:order-1">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white rounded-2xl shadow-lg p-8 md:p-10 space-y-10"
+            >
+              {GENERATOR_FORM_OPTIONS.map((group) => (
+                <Fieldset key={group.name} className="space-y-4">
+                  <Legend className="text-md font-semibold text-gray-900">
+                    {group.legend}
+                  </Legend>
 
-        {/*Right: Decorative image*/}
-        <DotLottieReact
-          src="generator.lottie"
-          aria-hidden="true"
-          loop
-          autoplay
-          className="flex-4 flex justify-center"
-        />
+                  <RadioGroup
+                    value={form[group.name]}
+                    onChange={(value) =>
+                      setForm((f) => ({ ...f, [group.name]: value }))
+                    }
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-6"
+                  >
+                    {group.options.map((option) => (
+                      <Field
+                        key={option.label}
+                        className="flex items-center gap-3"
+                      >
+                        <Radio
+                          value={option.value}
+                          className="group relative flex h-6 w-6 items-center justify-center rounded-full border-2 border-gray-300 bg-white cursor-pointer focus:outline-none data-checked:border-yellow-500 data-checked:bg-yellow-500 transition"
+                        >
+                          <span className="invisible size-2.5 rounded-full bg-white group-data-checked:visible" />
+                        </Radio>
+                        <Label className="cursor-pointer text-sm font-medium text-gray-700 select-none">
+                          {option.label}
+                        </Label>
+                      </Field>
+                    ))}
+                  </RadioGroup>
+                </Fieldset>
+              ))}
+
+              <div className="pt-6">
+                <Button
+                  type="submit"
+                  variant={BUTTON_CONFIG[status].variant}
+                  disabled={BUTTON_CONFIG[status].disabled}
+                  className="flex items-center justify-center w-full text-base py-4 font-semibold"
+                >
+                  {BUTTON_CONFIG[status].text}
+                </Button>
+              </div>
+            </form>
+          </div>
+
+          {/* Decorative Animation */}
+          <div className="order-1 lg:order-2 flex justify-center">
+            <DotLottieReact
+              src="generator.lottie"
+              loop
+              autoplay
+              aria-hidden="true"
+              className="w-full max-w-md"
+              style={{ maxHeight: '500px' }}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

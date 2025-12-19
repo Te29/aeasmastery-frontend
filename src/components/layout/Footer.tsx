@@ -17,11 +17,11 @@ const TEACHER_TOOLS = [
 export function Footer() {
   return (
     <footer className="bg-yellow-400">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py12 md:py-16">
-        <div className="flex flex-wrap justify-center gap-40">
-          {/* brand */}
-          <div className="max-w-40">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">AEASy.</h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-gray-900">
+          {/* Brand */}
+          <div>
+            <h2 className="text-2xl font-bold mb-4">AEASy.</h2>
             <p className="text-sm text-gray-800">
               Streamline your AEAS teaching with intelligent AI assistance —
               save time and enhance student outcomes effortlessly.
@@ -30,10 +30,10 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               {QUICK_LINKS.map((link) => (
-                <li key={link.label}>
+                <li key={link.to}>
                   <Link
                     to={link.to}
                     className="text-sm text-gray-800 hover:text-gray-900 hover:underline transition-colors"
@@ -44,10 +44,10 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          {/* What We Offer */}
+
           {/* What We Offer */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">What We Offer</h3>
+            <h3 className="font-semibold mb-4">What We Offer</h3>
             <ul className="space-y-2">
               {TEACHER_TOOLS.map((link) => (
                 <li key={link.to}>
@@ -62,14 +62,14 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Get In Touch */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Get In Touch</h3>
-            <ul className="space-y-2 text-sm text-gray-800">
+            <h3 className="font-semibold mb-4">Get In Touch</h3>
+            <ul className="space-y-3 text-sm text-gray-800">
               <li>hello@aeasy.com.au</li>
               <li className="flex items-center gap-2">
                 <svg
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -80,7 +80,7 @@ export function Footer() {
                   href="https://www.linkedin.com/in/shengfeng-terence-peng"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-gray-800 hover:text-gray-900 hover:underline transition-colors"
+                  className="hover:text-gray-900 hover:underline transition-colors"
                 >
                   LinkedIn
                 </a>
@@ -90,9 +90,9 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Copyright bar */}
-      <div className="border-t border-yellow-500">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4">
+      {/* Copyright */}
+      <div className="border-t border-yellow-500 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-sm text-gray-800">
             AEASy © {new Date().getFullYear()} All rights reserved.
           </p>

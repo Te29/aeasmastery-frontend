@@ -12,13 +12,21 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import type { GeneratorStatus, GeneratorForm } from '../../types';
 import { generateVocabularyExercise } from '../../services/api';
 import { GENERATOR_FORM_OPTIONS, BUTTON_CONFIG } from '../../constants/index';
+import type { VocabularyExercise } from '../../types/vocabulary';
 
 interface GeneratorFormProps {
   status: GeneratorStatus;
   setStatus: React.Dispatch<React.SetStateAction<GeneratorStatus>>;
+  setGeneratedData: React.Dispatch<
+    React.SetStateAction<VocabularyExercise | null>
+  >;
 }
 
-export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
+export function GeneratorForm({
+  status,
+  setStatus,
+  setGeneratedData,
+}: GeneratorFormProps) {
   const [form, setForm] = useState<GeneratorForm>({
     grade: '4-6',
     difficulty: 'easy',
@@ -31,7 +39,7 @@ export function GeneratorForm({ status, setStatus }: GeneratorFormProps) {
     setStatus('generating');
     try {
       const data = await generateVocabularyExercise(form);
-      console.log(data);
+      setGeneratedData(data);
       setStatus('success');
     } catch (error) {
       console.error('Failed to generate:', error);

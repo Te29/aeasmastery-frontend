@@ -4,9 +4,14 @@ import { GeneratorForm } from './GeneratorForm';
 import { useState, useRef, useEffect } from 'react';
 import { GenerationResult } from './GenerationResult';
 import type { GeneratorStatus } from '../../types';
+import type { VocabularyExercise } from '../../types/vocabulary';
 
 export function ExerciseGeneratorPage() {
   const [status, setStatus] = useState<GeneratorStatus>('idle');
+
+  const [generatedData, setGeneratedData] = useState<VocabularyExercise | null>(
+    null
+  );
 
   const resultRef = useRef<HTMLDivElement>(null);
 
@@ -23,8 +28,16 @@ export function ExerciseGeneratorPage() {
         title="AI Vocabulary Exercise Generator"
         description="Select grade and difficulty to generate exercises in official AEAS format."
       />
-      <GeneratorForm status={status} setStatus={setStatus} />
-      <GenerationResult status={status} ref={resultRef} />
+      <GeneratorForm
+        status={status}
+        setStatus={setStatus}
+        setGeneratedData={setGeneratedData}
+      />
+      <GenerationResult
+        status={status}
+        ref={resultRef}
+        generatedData={generatedData}
+      />
     </>
   );
 }

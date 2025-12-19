@@ -1,3 +1,4 @@
+import { cn } from '../../utils/cn';
 interface ButtonProps {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'disabled';
@@ -17,24 +18,26 @@ export function Button({
   ariaLabel,
   className = '',
 }: ButtonProps) {
-  const baseClass = 'h-11 rounded-lg px-4 py-3 text-sm font-medium';
-
-  const variantClasses = {
-    primary:
-      'bg-yellow-400 text-black hover:bg-yellow-500 hover:underline cursor-pointer',
-    secondary:
-      'text-black border border-yellow-400 hover:text-yellow-500 hover:underline cursor-pointer',
-    disabled:
-      'bg-gray-300 text-gray-900 border border-gray-300 cursor-not-allowed opacity-60',
-  };
-
   return (
     <button
       type={type}
       disabled={disabled}
       onClick={onClick}
       aria-label={ariaLabel}
-      className={`${baseClass} ${variantClasses[variant]} ${className} `}
+      className={cn(
+        'h-11 rounded-lg px-4 py-3 text-sm font-medium',
+        {
+          'bg-yellow-400 text-black hover:bg-yellow-500 hover:underline':
+            variant === 'primary',
+          'text-black border border-yellow-400 hover:text-yellow-500 hover:underline':
+            variant === 'secondary',
+          'bg-gray-300 text-gray-900 border border-gray-300 opacity-60':
+            variant === 'disabled',
+        },
+        disabled && 'cursor-not-allowed',
+        !disabled && 'cursor-pointer hover:underline',
+        className
+      )}
     >
       {children}
     </button>
